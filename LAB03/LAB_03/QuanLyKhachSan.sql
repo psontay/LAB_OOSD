@@ -323,4 +323,4 @@ SELECT table_name FROM user_tables ORDER BY table_name;
 SELECT COUNT(*) AS SoBang FROM user_tables;
 SELECT SoPhong, TrangThai FROM Phong ORDER BY SoPhong;
 SELECT SoPhieuDat, TrangThai FROM PhieuDatPhong;
-
+git

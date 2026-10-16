@@ -1,0 +1,13 @@
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\obj\Debug\QuanLyBenhAn.csproj.AssemblyReference.cache
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\obj\Debug\QuanLyBenhAn.csproj.CoreCompileInputs.cache
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\bin\Debug\QuanLyBenhAn.exe.config
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\bin\Debug\QuanLyBenhAn.exe
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\bin\Debug\QuanLyBenhAn.pdb
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\bin\Debug\Oracle.ManagedDataAccess.dll
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\bin\Debug\System.Memory.dll
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\bin\Debug\System.Numerics.Vectors.dll
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\bin\Debug\System.Buffers.dll
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\obj\Debug\QuanLyBe.D6CD1318.Up2Date
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\obj\Debug\QuanLyBenhAn.exe
+D:\WorkSpace\OOSD\LAB_06\QuanLyBenhAn\QuanLyBenhAn\obj\Debug\QuanLyBenhAn.pdb

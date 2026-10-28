@@ -1,4 +1,4 @@
-# Tổng hợp Bài tập Môn Phương pháp phát triển phần mềm hướng đối tượng
+# LAB
 
 
 ---
@@ -19,7 +19,7 @@
 * **Cơ sở dữ liệu:** SQL Server
 * **Kiến trúc:** 3 lớp (UI → Service / Adapter → Data → SQL Server)
 * **Vẽ mô hình:** PlantUML (Use Case, Biểu đồ lớp phân tích của hệ thống, Biểu đồ trạng thái, Biểu đồ lớp thiết kế chi tiết của hệ thống, Sequence, Activity, ERD, ...)
-* **Công cụ:** Visual Studio, SQL Server Management Studio (SSMS), Draw.io, Git/GitHub
+* **Công cụ:** Visual Studio, Oracle, Draw.io, Git/GitHub
 
 ---
 

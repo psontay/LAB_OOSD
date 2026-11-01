@@ -1,0 +1,52 @@
+@startuml AD01_Cau5
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+title Hoạt động: đăng ký tour đến kết thúc tour
+|Khách hàng|
+start
+:Liên hệ đăng ký tour;
+|Nhân viên|
+:Hỏi số người đi;
+|Hệ thống|
+if (Số người >= 13?) then (có)
+  |Nhân viên|
+  :Nhập thông tin đoàn, ngày đi;
+  :Nhập danh sách (nếu mua bảo hiểm);
+  |Khách hàng|
+  :Nộp tiền cọc >= 30%;
+  |Hệ thống|
+  :Lưu phiếu "Đã đặt cọc";
+else (không)
+  |Nhân viên|
+  :Chọn chuyến có lịch sẵn;
+  |Hệ thống|
+  if (Còn đủ chỗ?) then (còn)
+  else (hết)
+    |Nhân viên|
+    :Gợi ý chuyến khác;
+    stop
+  endif
+  |Khách hàng|
+  :Trả tiền vé;
+  |Hệ thống|
+  :Lưu vé;
+endif
+|Nhân viên|
+:Phân công hướng dẫn viên;
+|Hệ thống|
+:Kiểm tra trùng lịch;
+|Nhân viên|
+:Khởi hành;
+:Kết thúc tour;
+|Hệ thống|
+:Tạo phiếu khảo sát;
+|Khách hàng|
+:Trả lời khảo sát;
+:Thanh toán phần còn lại (khách đoàn);
+stop
+@enduml

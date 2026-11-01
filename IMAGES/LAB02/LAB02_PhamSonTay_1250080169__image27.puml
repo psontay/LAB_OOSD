@@ -1,0 +1,44 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+title Activity - NDC-03: Đăng nhập
+|Người dùng|
+start
+:Nhập username/email + password;
+:Nhấn "Đăng nhập";
+|Hệ thống|
+:Kiểm tra dữ liệu nhập (định dạng);
+if (Hợp lệ?) then (Không)
+ :Báo lỗi;
+ |Người dùng|
+ :Nhập lại;
+ stop
+else (Có)
+endif
+|Người dùng|
+:Tìm tài khoản;
+if (Tài khoản tồn tại?) then (Không)
+ :Báo sai thông tin;
+ stop
+else (Có)
+endif
+:soLanSai = 0;
+repeat
+ :Kiểm tra mật khẩu;
+ if (Mật khẩu đúng?) then (Sai)
+  :soLanSai = soLanSai + 1;
+  :Báo lỗi;
+  if (soLanSai >= 5?) then (Có)
+   :Khóa tạm thời tài khoản [BỔ SUNG];
+   stop
+  else (Không)
+  endif
+ else (Đúng)
+  break
+ endif
+repeat while (Chưa đăng nhập thành công?) is (Có)
+:Tạo session;
+:Xác định role (Reader/Librarian);
+:Chuyển đến màn hình tương ứng;
+stop
+@enduml

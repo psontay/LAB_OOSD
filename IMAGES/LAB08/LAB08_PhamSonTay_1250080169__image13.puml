@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+title TIẾP NHẬN MỘT ĐỢT HÀNG
+hide footbox
+actor "Nhân viên" as NV
+participant ":FrmNhapHang" as F
+participant ":NhapHangService" as S
+participant ":CuaHangRepository" as R
+NV -> F : Lưu phiếu giao hàng
+F -> S : nhanHang(dto)
+S -> R : begin()
+S -> R : lock("DonDatHang", maDDH)
+S -> R : load("DonDatHang", maDDH)
+R --> S : đơn + các dòng đặt
+S -> R : query(đợt nhận + lượng đã nhận)
+R --> S : số đợt, tổng đã nhận từng NGK
+S -> R : lock("NuocGiaiKhat", maNGK) [mỗi mã]
+alt hợp lệ
+ S -> R : save(phiếu + chi tiết) [hợp lệ]
+ S -> R : commit()
+ S --> F : maPGH; tồn mới suy ra
+else else: vi phạm / lỗi
+ S -> R : rollback() [vi phạm / lỗi lưu]
+ S --> F : thông báo; giữ dữ liệu nhập
+end
+@enduml

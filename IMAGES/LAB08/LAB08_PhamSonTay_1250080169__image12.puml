@@ -1,0 +1,51 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+hide empty fields
+class NhapHangService {
+ + lapDon(dto: DonDTO): String
+ + nhanHang(dto: NhanDTO): String
+}
+class BanHangService {
+ + banHang(dto: BanDTO): String
+ + lapHen(dto: HenDTO): String
+ + xacNhanGiao(ma: String, d: Date): void
+ + doiNgayHen(ma: String, d: Date): void
+}
+class CongNoService {
+ + lapPhieuNo(dto: NoDTO): String
+ - kiemTraNo(hd: HoaDon): Decimal
+}
+class KhoService {
+ + ton(maNGK: String): Int
+ + conPhaiGiao(maHD: String, maNGK: String): Int
+}
+class DanhMucService {
+ + luu(loai: String, dto: DanhMucDTO): void
+ + xoa(loai: String, ma: String): void
+}
+class TraCuuService {
+ + tim(tieuChi: TraCuuDTO): KetQuaDTO
+}
+class CuaHangRepository {
+ + begin(): void
+ + commit(): void
+ + rollback(): void
+ + lock(loai: String, ma: String): void
+ + load(loai: String, ma: String): Object
+ + save(obj: Object): void
+ + query(tieuChi: QueryDTO): List<Object>
+}
+BanHangService ..> KhoService
+' Shared dependency bus resolved using section 3.1.4: all services depend on repository.
+NhapHangService ..> CuaHangRepository
+BanHangService ..> CuaHangRepository
+CongNoService ..> CuaHangRepository
+KhoService ..> CuaHangRepository
+DanhMucService ..> CuaHangRepository
+TraCuuService ..> CuaHangRepository
+@enduml

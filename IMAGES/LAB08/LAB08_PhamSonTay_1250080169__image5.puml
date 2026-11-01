@@ -1,0 +1,32 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+title KHÁCH ĐẶT MUA → GIAO ĐỦ NGK
+start
+:NV: nhập yêu cầu mua\nHệ thống: kiểm tra tồn;
+if (Đủ hàng?) then ([có])
+ :NV: lập HĐ, thu tiền /\nghi nợ nếu khách quen;
+ :NV: giao toàn bộ ngay\nHT: ghi số lượng giao ngay;
+ stop
+else ([không])
+ if (Khách quen?) then ([không])
+  :NV: báo không đáp ứng\nKhông lập HĐ thiếu hàng;
+  stop
+ else ([có])
+  :NV: lập HĐ\nGiao phần có sẵn;
+  repeat
+   :NV: hẹn phần còn thiếu\nHT: lưu phiếu hẹn + chi tiết;
+   repeat
+    :Đến hẹn: NV kiểm tra tồn\nđể giao số lượng đã hẹn;
+    backward :NV: đổi ngày hẹn\nGiữ nguyên phần chưa giao;
+   repeat while (Đủ giao hẹn?) is ([không]) not ([có])
+   :NV: xác nhận giao\nHT: trừ tồn theo phiếu đã giao;
+  repeat while (Còn phải giao?) is ([có]) not ([không])
+ endif
+endif
+stop
+@enduml

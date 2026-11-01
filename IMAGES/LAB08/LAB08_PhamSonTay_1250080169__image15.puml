@@ -1,0 +1,28 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+title LẬP PHIẾU GHI NỢ CHO KHÁCH QUEN
+hide footbox
+actor "Nhân viên" as NV
+participant ":FrmGhiNo" as F
+participant ":CongNoService" as S
+participant ":CuaHangRepository" as R
+NV -> F : Chọn HĐ, ngày trả, lý do; Lưu
+F -> S : lapPhieuNo(dto)
+S -> R : begin(); lock("HoaDon", maHD)
+S -> R : load("HoaDon", maHD)
+R --> S : hóa đơn, khách, chi tiết, phiếu nợ nếu có
+S -> S : kiemTraNo(hd)
+alt hợp lệ
+ S -> R : save(PhieuGhiNo) [khách quen, nợ > 0]
+ S -> R : commit()
+ S --> F : mã phiếu; số tiền nợ; tên NV
+else else: vi phạm / lỗi
+ S -> R : rollback()
+ S --> F : từ chối; không sinh phiếu trùng
+end
+@enduml

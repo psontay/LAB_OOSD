@@ -1,0 +1,57 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+title Sequence - TT-02: Quản lý trả sách
+actor "Thủ thư" as U
+boundary "Return UI" as UI
+control ReturnController as C
+control LoanService as L
+control InventoryService as I
+control ViolationService as V
+database DB
+U -> UI : scan copy
+activate UI
+UI -> C : returnCopy(copyId)
+activate C
+C -> L : findOpenLoan(copyId)
+activate L
+L -> DB : query active loan
+DB --> L : loan
+L --> C : loan
+deactivate L
+alt không tìm thấy phiếu mượn
+ C --> UI : showError()
+ UI --> U : nhập lại
+else tìm thấy
+ C --> UI : loan detail (kèm số ngày trễ nếu có)
+ UI --> U : hiển thị chi tiết
+ U -> UI : xác nhận trả + tình trạng sách
+ UI -> C : confirmReturn(condition)
+ alt sách hư hỏng nặng
+  C -> I : markDamaged(copyId, note)
+  activate I
+  I -> DB : update copy = "Cần kiểm tra"
+  deactivate I
+  note right of DB : Không tăng availability
+ else sách bình thường
+  C -> I : updateCopyStatus(copyId, "Trong kho")
+  activate I
+  I -> DB : update copy + tăng availability
+  deactivate I
+ end
+ C -> L : closeLoan(loanId, returnDate)
+ activate L
+ L -> DB : update loan = RETURNED
+ deactivate L
+ alt quá hạn
+  C -> V : recordOverdue(loanId, soNgayTre)
+  activate V
+  V -> DB : save violation
+  deactivate V
+ end
+ C --> UI : success
+ UI --> U : thông báo thành công
+end
+deactivate C
+deactivate UI
+@enduml

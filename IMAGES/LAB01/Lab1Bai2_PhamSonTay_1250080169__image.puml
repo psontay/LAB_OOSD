@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+skinparam backgroundColor white
+skinparam shadowing false
+actor "Khách vãng lai" as KV
+actor "Khách quen" as KQ
+actor "Nhân viên cửa hàng" as NV
+actor "Nhà cung ứng" as NCC
+rectangle "Hệ thống quản lý cửa hàng nước giải khát" {
+ usecase "Bán hàng -\nLập hóa đơn" as BH
+ usecase "Lập đơn đặt hàng" as DDH
+ usecase "Tra cứu, thống kê" as TC
+ usecase "Lập phiếu hẹn\ngiao hàng" as PH
+ usecase "Lập phiếu ghi nợ" as PN
+ usecase "Quản lý nhãn hiệu NGK" as NH
+ usecase "Quản lý nước giải khát" as NGK
+ usecase "Quản lý nhà cung ứng" as QLNCC
+ usecase "Nhận hàng\n(phiếu giao hàng)" as GH
+}
+KV --> BH
+KQ --> BH
+NV --> BH
+NV --> DDH
+NV --> TC
+NV --> PH
+NV --> PN
+NV --> NH
+NV --> NGK
+NV --> QLNCC
+NV --> GH
+NCC --> GH
+' These two extend arrows intentionally retain the directions visible in the image.
+BH ..> PH : <<extend>>
+BH ..> PN : <<extend>>
+@enduml

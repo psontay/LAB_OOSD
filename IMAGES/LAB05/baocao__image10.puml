@@ -1,0 +1,36 @@
+@startuml SD02_PhanCong
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+autonumber "<b>[0]"
+title Tuần tự - Phân công hướng dẫn viên
+actor "Điều hành tour" as DH
+participant ":FrmPhanCong" as F
+participant ":PhanCongService" as S
+database "DULICH" as O
+DH -> F : chọn đoàn / chuyến
+F -> S : LayNhanVienRanh(ngayDi, ngayVe)
+S -> O : SELECT NhanVien NOT EXISTS PhanCong giao lịch
+O --> F : danh sách rảnh
+DH -> F : chọn nhân viên, bấm Phân công
+F -> S : PhanCong(maNV, soPhieu, maChuyen)
+opt là chuyến khách lẻ
+  S -> O : đếm phân công của chuyến
+  alt đã có 1 HDV
+    S --> F : Loi("chỉ 1 nhân viên")
+  end
+end
+S -> O : INSERT PhanCong
+O -> O : TRG_PhanCong_Ngay\nTRG_PhanCong_ChongCheo
+alt trùng lịch
+  O --> S : ORA-20030
+  S --> F : Loi("trùng lịch")
+else
+  S --> F : Dat()
+end
+F --> DH : thông báo, nạp lại lưới
+@enduml

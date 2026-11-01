@@ -1,0 +1,21 @@
+@startuml ST02_VeChuyen
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+hide empty description
+title Trạng thái - Vé chuyến của khách lẻ
+state "Đã thanh toán" as A
+state "Đã hủy" as B
+state "Đã đi" as C
+state "Đã khảo sát" as D
+[*] --> A : bán vé [chuyến còn chỗ]
+A --> B : khách hủy [chuyến đang mở bán]
+A --> C : chuyến kết thúc
+C --> D : khách trả lời khảo sát
+B --> [*]
+D --> [*]
+@enduml

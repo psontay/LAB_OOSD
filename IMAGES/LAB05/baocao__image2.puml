@@ -1,0 +1,45 @@
+@startuml UC02_Cau4
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+left to right direction
+title Phân rã: đăng ký tour → kết thúc tour
+actor "Nhân viên bán tour" as BT
+actor "Điều hành tour" as DH
+actor "Kế toán" as KT
+rectangle "Giai đoạn 1 - Đăng ký" {
+  usecase "Đăng ký theo đoàn" as DK1
+  usecase "Đăng ký theo chuyến" as DK2
+  usecase "Kiểm tra số người\n(>12 hay ≤12)" as KSN
+  usecase "Nhận tiền cọc" as COC
+  usecase "Thu tiền vé" as VE
+  usecase "Lập danh sách\nngười đi cùng" as DS
+}
+rectangle "Giai đoạn 2 - Thực hiện" {
+  usecase "Phân công HDV" as PC
+  usecase "Khởi hành" as KH
+  usecase "Hủy đoàn" as HUY
+  usecase "Kết thúc tour" as KT1
+}
+rectangle "Giai đoạn 3 - Sau tour" {
+  usecase "Quyết toán đoàn" as QT
+  usecase "Khảo sát khách" as KS
+}
+BT --> DK1
+BT --> DK2
+DH --> PC
+DH --> KH
+DH --> KT1
+KT --> QT
+DK1 ..> KSN : <<include>>
+DK2 ..> KSN : <<include>>
+DK1 ..> COC : <<include>>
+DK2 ..> VE : <<include>>
+DS ..> DK1 : <<extend>>
+HUY ..> KH : <<extend>>
+KT1 ..> KS : <<include>>
+@enduml

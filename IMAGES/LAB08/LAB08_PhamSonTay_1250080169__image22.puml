@@ -1,0 +1,65 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+hide empty methods
+entity NhaCungUng {
+ MaNCU [PK]
+ TenNCU
+ DiaChi
+ DienThoai
+}
+entity LoaiNGK {
+ MaLoai [PK]
+ TenLoai
+ MaNCU [FK]
+}
+entity DonDatHang {
+ MaDDH [PK]
+ MaNCU [FK]
+ MaNV [FK]
+ NgayDat
+ NgayNhanDuKien
+}
+entity NuocGiaiKhat {
+ MaNGK [PK]
+ TenNGK
+ DonViTinh
+ MaLoai [FK]
+}
+entity PhieuGiaoHang {
+ MaPGH [PK]
+ MaDDH [FK]
+ MaNV [FK]
+ NgayGiao
+ SoTienPhaiTra
+}
+entity CTDonDatHang {
+ MaDDH [PK] [FK]
+ MaNGK [PK] [FK]
+ SoLuongDat
+}
+entity CTPhieuGiaoHang {
+ MaPGH [PK] [FK]
+ MaNGK [PK] [FK]
+ MaDDH [FK]
+ SoLuongGiao
+}
+entity NhanVien {
+ MaNV [PK]
+ HoTen
+}
+NhaCungUng "1" -right- "0..*" LoaiNGK
+NhaCungUng "1" -- "0..*" DonDatHang
+LoaiNGK "1" -- "0..*" NuocGiaiKhat
+NuocGiaiKhat "1" -- "0..*" CTDonDatHang
+DonDatHang "1" -right- "1..*" CTDonDatHang
+DonDatHang "1" -- "0..3" PhieuGiaoHang
+PhieuGiaoHang "1" -- "1..*" CTPhieuGiaoHang
+CTDonDatHang "1" -- "0..3" CTPhieuGiaoHang
+NhanVien "1" -- "0..*" DonDatHang
+NhanVien "1" -- "0..*" PhieuGiaoHang
+@enduml

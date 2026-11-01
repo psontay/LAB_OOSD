@@ -1,0 +1,25 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 18
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam dpi 160
+skinparam nodesep 35
+skinparam ranksep 35
+skinparam classAttributeIconSize 0
+hide circle
+left to right direction
+actor "Đồng hồ hệ thống" as C
+actor "Máy chủ thư điện tử" as M
+package "Thư viện số — 3/3: Xử lý theo lịch" {
+usecase "HT-02\nGửi email nhắc hạn trả" as H2
+usecase "HT-03\nHủy yêu cầu mượn\nquá thời gian giữ chỗ" as H3
+}
+C -- H2
+C -- H3
+H2 -- M
+note bottom of H2 : Trước hạn trả 3 ngày (BR05)
+note bottom of H3 : Giữ chỗ tối đa 2 ngày (BR04)
+@enduml

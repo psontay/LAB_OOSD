@@ -1,0 +1,45 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+class DonDatHang {
+ - MaDDH: String {ID}
+ - MaNCU: String
+ - MaNV: String
+ - NgayDat: Date
+ - NgayNhanDuKien: Date
+ --
+ + kiemTraNgay(): Boolean
+}
+class CTDonDatHang {
+ - MaDDH: String {ID}
+ - MaNGK: String {ID}
+ - SoLuongDat: Int
+ --
+ + kiemTraSoLuong(): Boolean
+}
+class PhieuGiaoHang {
+ - MaPGH: String {ID}
+ - MaDDH: String
+ - MaNV: String
+ - NgayGiao: Date
+ - SoTienPhaiTra: Decimal
+ --
+ + kiemTraTien(): Boolean
+}
+class CTPhieuGiaoHang {
+ - MaPGH: String {ID}
+ - MaNGK: String {ID}
+ - MaDDH: String
+ - SoLuongGiao: Int
+ --
+ + kiemTraSoLuong(): Boolean
+}
+DonDatHang "1" -right- "1..*" CTDonDatHang
+DonDatHang "1" -- "0..3" PhieuGiaoHang
+CTDonDatHang "1" -- "0..3" CTPhieuGiaoHang
+PhieuGiaoHang "1" -right- "1..*" CTPhieuGiaoHang
+@enduml

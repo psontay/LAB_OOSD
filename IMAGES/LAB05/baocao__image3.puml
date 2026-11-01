@@ -1,0 +1,29 @@
+@startuml UC03_PhanCong
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+left to right direction
+title Phân rã use case "Phân công hướng dẫn viên"
+actor "Điều hành tour" as DH
+actor "Hướng dẫn viên" as HD
+rectangle "Phân công hướng dẫn viên" {
+  usecase "Chọn đoàn / chuyến\nchưa khởi hành" as A
+  usecase "Lọc nhân viên rảnh" as B
+  usecase "Gán hướng dẫn viên" as C
+  usecase "Kiểm tra trùng lịch" as D
+  usecase "Kiểm tra 1 HDV / chuyến" as E
+  usecase "Hủy phân công" as F
+  usecase "Xem lịch dẫn tour" as G
+}
+DH --> A
+DH --> C
+DH --> F
+HD --> G
+C ..> B : <<include>>
+C ..> D : <<include>>
+E ..> C : <<extend>>\n[chuyến khách lẻ]
+@enduml

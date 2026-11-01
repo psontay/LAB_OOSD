@@ -1,0 +1,56 @@
+@startuml CL03_ChiTiet
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+title Lớp chi tiết - mô-đun đăng ký theo đoàn
+class FrmPhieuDoan {
+  -_sv : PhieuDoanService
+  -_dsCuaPhieu : string
+  -cboKhachDoan : ComboBox
+  -cboTour : ComboBox
+  -dtpNgayDi : DateTimePicker
+  -numSoNguoi : NumericUpDown
+  -numTienCoc : NumericUpDown
+  -dgvNguoiDiCung : DataGridView
+  -TinhLai()
+  -DocDanhSach() : List<NguoiDiCungDto>
+  -btnLapPhieu_Click()
+  -DoiTrangThai(moi, hoi)
+}
+class PhieuDoanService {
+  +SoNguoiToiThieuDoan : int = 13
+  +TyLeCocToiThieu : decimal = 0.3
+  +TinhKinhPhi(maTour, soNguoi) : decimal
+  +KiemTra(p, k, ds, tong) : string
+  +LapPhieu(p, k, ds) : KetQua
+  +LuuDanhSach(soPhieu, ds) : KetQua
+  +ChuyenTrangThai(soPhieu, moi) : KetQua
+}
+class PhieuDoanDto {
+  +MaKD : string
+  +MaTour : string
+  +NgayDi : DateTime
+  +SoNguoi : int
+  +CoBaoHiem : bool
+  +TienCoc : decimal
+}
+class KetQua {
+  +ThanhCong : bool
+  +ThongDiep : string
+  +Ma : string
+}
+class Db <<static>> {
+  +Query() : DataTable
+  +Execute() : int
+  +Transaction(Action)
+  +SinhMa() : string
+}
+FrmPhieuDoan --> PhieuDoanService
+FrmPhieuDoan ..> PhieuDoanDto
+PhieuDoanService ..> KetQua
+PhieuDoanService ..> Db
+@enduml

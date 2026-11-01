@@ -1,0 +1,24 @@
+@startuml CL02_BCE_LapPhieu
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+left to right direction
+title Lớp phân tích B-C-E cho use case "Đăng ký theo đoàn"
+actor "Nhân viên\nbán tour" as NV
+boundary "Giao diện\nlập phiếu đoàn" as F
+control "Điều khiển\nđăng ký đoàn" as C
+entity "KhachDoan" as E1
+entity "Tour" as E2
+entity "PhieuDangKyDoan" as E3
+entity "NguoiDiCung" as E4
+NV -- F
+F -- C : nhập / xác nhận
+C -- E1 : tìm hoặc tạo
+C -- E2 : lấy đơn giá
+C -- E3 : tạo phiếu
+C -- E4 : lưu danh sách
+@enduml

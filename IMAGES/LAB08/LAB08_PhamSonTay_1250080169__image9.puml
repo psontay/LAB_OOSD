@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+class NhanVien {
+ - MaNV: String {ID}
+ - HoTen: String
+ --
+ + doiHoTen(ten: String): void
+}
+class PhieuGhiNo {
+ - MaPGN: String {ID}
+ - MaHD: String
+ - MaNV: String
+ - NgayLap: Date
+ - SoTienNo: Decimal
+ - NgayDuKienTra: Date
+ - LyDo: String
+ --
+ + kiemTraNgay(): Boolean
+}
+NhanVien "1" -right- "0..*" PhieuGhiNo
+@enduml

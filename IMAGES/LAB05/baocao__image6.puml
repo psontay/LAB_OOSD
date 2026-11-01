@@ -1,0 +1,28 @@
+@startuml ST01_PhieuDoan
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+hide empty description
+title Trạng thái - Phiếu đăng ký theo đoàn
+state "Đã đặt cọc" as S1
+state "Đang đi" as S2
+state "Chờ thanh toán" as S3
+state "Đã thanh toán" as S4
+state "Hủy - mất cọc" as S5
+[*] -right-> S1 : lập phiếu
+S1 -right-> S2 : khởi hành
+S2 -right-> S3 : về TP.HCM
+S3 -down-> S4 : quyết toán
+S1 -down-> S5 : đoàn hủy
+S4 --> [*]
+S5 --> [*]
+note bottom of S1
+  Điều kiện khởi hành:
+  - có ít nhất 1 HDV
+  - đủ danh sách nếu mua bảo hiểm
+end note
+@enduml

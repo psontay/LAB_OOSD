@@ -1,0 +1,25 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+left to right direction
+actor "Nhân viên" as NV
+rectangle "UC04 · BÁN VÀ GIAO HÀNG" {
+ usecase "Bán và giao hàng" as BAN
+ usecase "Kiểm tra tồn kho" as TON
+ usecase "Lập hóa đơn" as HD
+ usecase "Lập phiếu hẹn" as HEN
+ usecase "Ghi nhận thanh toán ban đầu" as TT
+ usecase "Xác nhận giao theo hẹn" as GIAO
+}
+NV -- BAN
+NV -- GIAO
+BAN ..> TON : <<include>>
+BAN ..> HD : <<include>>
+HEN ..> BAN : <<extend>>
+BAN ..> TT : <<include>>
+note bottom of HEN : [Khách quen và thiếu hàng]
+@enduml

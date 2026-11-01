@@ -1,0 +1,38 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 18
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam dpi 160
+skinparam nodesep 35
+skinparam ranksep 35
+skinparam classAttributeIconSize 0
+hide circle
+left to right direction
+actor "Thủ thư" as T
+package "Thư viện số — 2/3: Nghiệp vụ thủ thư" {
+usecase "TT-01\nQuản lý mượn sách" as T1
+usecase "TT-02\nQuản lý trả sách" as T2
+usecase "TT-03\nTheo dõi tình trạng\ntài liệu" as T3
+usecase "TT-04\nCập nhật danh mục" as T4
+usecase "TT-05\nXử lý yêu cầu đặt mua" as T5
+usecase "TT-06\nLập báo cáo, thống kê" as T6
+usecase "NDC-03\nĐăng nhập" as N3
+usecase "Tính phí /\nghi nhận trả trễ" as L
+}
+T -- T1
+T -- T2
+T -- T3
+T -- T4
+T -- T5
+T -- T6
+T1 ..> N3 : <<include>>
+T2 ..> N3 : <<include>>
+T3 ..> N3 : <<include>>
+T4 ..> N3 : <<include>>
+T5 ..> N3 : <<include>>
+T6 ..> N3 : <<include>>
+L ..> T2 : <<extend>>\n[phiếu mượn quá hạn]
+@enduml

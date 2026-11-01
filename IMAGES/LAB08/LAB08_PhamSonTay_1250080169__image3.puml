@@ -1,0 +1,18 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+left to right direction
+actor "Nhân viên" as NV
+rectangle "UC03 · TIẾP NHẬN HÀNG NHẬP" {
+ usecase "Tiếp nhận hàng nhập" as NHAN
+ usecase "Đối chiếu đơn đặt hàng" as DC
+ usecase "Ghi phiếu giao và chi tiết" as PG
+}
+NV -- NHAN
+NHAN ..> DC : <<include>>
+NHAN ..> PG : <<include>>
+@enduml

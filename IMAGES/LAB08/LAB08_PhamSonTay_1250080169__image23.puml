@@ -1,0 +1,71 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+hide empty methods
+entity KhachHang {
+ MaKH [PK]
+ HoTen
+ LoaiKhach
+ DiaChi
+ DienThoai
+}
+entity NhanVien {
+ MaNV [PK]
+ HoTen
+}
+entity HoaDon {
+ MaHD [PK]
+ MaKH [FK]
+ MaNV [FK]
+ NgayLap
+ SoTienDaTra
+}
+entity CTHoaDon {
+ MaHD [PK] [FK]
+ MaNGK [PK] [FK]
+ SoLuongMua
+ DonGiaBan
+ SoLuongGiaoNgay
+}
+entity PhieuHen {
+ MaPH [PK]
+ MaHD [FK]
+ NgayHen
+ NgayGiaoThucTe
+ TrangThai
+}
+entity CTPhieuHen {
+ MaPH [PK] [FK]
+ MaNGK [PK] [FK]
+ MaHD [FK]
+ SoLuongHen
+}
+entity PhieuGhiNo {
+ MaPGN [PK]
+ MaHD [FK]
+ MaNV [FK]
+ NgayLap
+ SoTienNo
+ NgayDuKienTra
+ LyDo
+}
+entity NuocGiaiKhat {
+ MaNGK [PK]
+ TenNGK
+ DonViTinh
+ MaLoai [FK]
+}
+KhachHang "1" -- "0..*" HoaDon
+NhanVien "1" -- "0..*" HoaDon
+HoaDon "1" -right- "1..*" CTHoaDon
+HoaDon "1" -- "0..*" PhieuHen
+CTHoaDon "1" -- "0..*" CTPhieuHen
+PhieuHen "1" -right- "1..*" CTPhieuHen
+HoaDon "1" -- "0..1" PhieuGhiNo
+NhanVien "1" -- "0..*" PhieuGhiNo
+NuocGiaiKhat "1" -- "0..*" CTHoaDon
+@enduml

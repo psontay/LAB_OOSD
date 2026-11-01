@@ -1,0 +1,47 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 18
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam dpi 160
+skinparam nodesep 35
+skinparam ranksep 35
+skinparam classAttributeIconSize 0
+hide circle
+left to right direction
+actor "Người dùng" as U <<abstract>>
+actor "Độc giả" as D
+actor "Thủ thư" as T
+T -up-|> D
+D -up-|> U
+package "Thư viện số — 1/3: Tra cứu và độc giả" {
+usecase "NDC-01\nTìm kiếm tài liệu" as N1
+usecase "NDC-02\nXem chi tiết tài liệu" as N2
+usecase "NDC-03\nĐăng nhập" as N3
+usecase "NDC-04\nĐăng xuất" as N4
+usecase "DG-01\nĐọc trực tuyến" as D1
+usecase "DG-02\nTải tài liệu điện tử" as D2
+usecase "DG-03\nĐăng ký mượn sách" as D3
+usecase "DG-04\nĐăng ký tài khoản" as D4
+usecase "DG-05\nĐặt mua tài liệu" as D5
+usecase "DG-06\nXem lịch sử mượn\nvà yêu cầu đặt mua" as D6
+usecase "HT-01\nKiểm tra mã thẻ" as H1
+}
+U -- N1
+U -- N2
+U -- N3
+U -- N4
+D -- D1
+D -- D2
+D -- D3
+D -- D4
+D -- D5
+D -- D6
+D2 ..> H1 : <<include>>
+D3 ..> H1 : <<include>>
+D4 ..> N3 : <<extend>>\n[chưa có tài khoản]
+D5 ..> N3 : <<include>>
+D6 ..> N3 : <<include>>
+@enduml

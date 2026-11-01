@@ -1,0 +1,73 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 18
+skinparam monochrome true
+skinparam dpi 160
+skinparam nodesep 55
+skinparam ranksep 75
+skinparam classAttributeIconSize 0
+hide circle
+title Lớp nghiệp vụ — 3/3: Bán hàng và công nợ
+class KhachHang {
++maKhachHang: String
++tenKhachHang: String
++diaChi: String
++soDienThoai: String
++loaiKhach: String
+--
++kiemTraLoaiKhach()
+}
+class HoaDon {
++soHoaDon: String
++ngayLap: Date
++tongTien: Decimal
++hinhThucThanhToan: String
+--
++lapHoaDon()
++kiemTraDuHang()
+}
+class ChiTietHoaDon {
++soLuongMua: Integer
++donGiaBan: Decimal
++thanhTien: Decimal
+--
++tinhThanhTien()
+}
+class PhieuHenGiaoHang {
++soPhieuHen: String
++ngayHenGiao: Date
++soLuongHenGiao: Integer
++trangThai: String
+--
++lapPhieuHen()
+}
+class PhieuGhiNo {
++soPhieuGhiNo: String
++ngayLapPhieu: Date
++soTienNo: Decimal
++ngayDuKienTra: Date
++lyDoNo: String
+--
++lapPhieuGhiNo()
++tinhSoNgayQuaHan()
+}
+class NhanVien <<tham chiếu>>
+hide NhanVien members
+class NuocGiaiKhat <<tham chiếu>>
+hide NuocGiaiKhat members
+KhachHang "1" -- "*" HoaDon
+NhanVien "1" -- "*" HoaDon
+HoaDon "1" *-right- "*" ChiTietHoaDon
+NuocGiaiKhat "1" -- "*" ChiTietHoaDon
+HoaDon "1" -down- "0..*" PhieuHenGiaoHang
+HoaDon "0..1" --- "0..1" PhieuGhiNo
+KhachHang "1" -- "*" PhieuGhiNo
+NhanVien "1" -- "*" PhieuHenGiaoHang
+NhanVien "1" -- "*" PhieuGhiNo
+legend bottom
+Các lớp «tham chiếu»: xem thuộc tính ở góc nhìn 1/3 và 2/3.
+endlegend
+@enduml

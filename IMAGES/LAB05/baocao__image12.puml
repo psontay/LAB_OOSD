@@ -1,0 +1,100 @@
+@startuml ERD02_LuocDo
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+left to right direction
+hide circle
+hide methods
+title Lược đồ quan hệ (chỉ khóa)
+entity Tour {
+  MaTour PK
+}
+entity NoiDungChan {
+  MaTour PK,FK
+  ThuTu PK
+  MaDiaDanh FK
+  MaPT FK
+}
+entity DiaDanh {
+  MaDiaDanh PK
+}
+entity PhuongTien {
+  MaPT PK
+}
+entity DiemThamQuan {
+  MaDTQ PK
+}
+entity Tour_DiemThamQuan {
+  MaTour PK,FK
+  MaDTQ PK,FK
+}
+entity KhachDoan {
+  MaKD PK
+}
+entity PhieuDangKyDoan {
+  SoPhieu PK
+  MaKD FK
+  MaTour FK
+}
+entity NguoiDiCung {
+  SoPhieu PK,FK
+  STT PK
+}
+entity ChuyenDi {
+  MaChuyen PK
+  MaTour FK
+}
+entity KhachLe {
+  MaKL PK
+}
+entity DiemBanVe {
+  MaDiemBan PK
+}
+entity DiemDon {
+  MaDiemDon PK
+}
+entity VeChuyen {
+  SoVe PK
+  MaChuyen FK
+  MaKL FK
+  MaDiemBan FK
+  MaDiemDon FK
+}
+entity NhanVien {
+  MaNV PK
+}
+entity PhanCong {
+  MaPhanCong PK
+  MaNV FK
+  SoPhieu FK
+  MaChuyen FK UQ
+}
+entity PhieuKhaoSat {
+  MaKhaoSat PK
+  SoPhieu FK UQ
+  SoVe FK UQ
+}
+Tour ||--|{ NoiDungChan
+DiaDanh ||--o{ NoiDungChan
+PhuongTien ||--o{ NoiDungChan
+PhuongTien ||--o{ Tour
+Tour ||--o{ Tour_DiemThamQuan
+DiemThamQuan ||--o{ Tour_DiemThamQuan
+KhachDoan ||--o{ PhieuDangKyDoan
+Tour ||--o{ PhieuDangKyDoan
+PhieuDangKyDoan ||--o{ NguoiDiCung
+Tour ||--o{ ChuyenDi
+ChuyenDi ||--o{ VeChuyen
+KhachLe ||--o{ VeChuyen
+DiemBanVe ||--o{ VeChuyen
+DiemDon ||--o{ VeChuyen
+NhanVien ||--o{ PhanCong
+PhieuDangKyDoan |o--o{ PhanCong
+ChuyenDi |o--o| PhanCong
+PhieuDangKyDoan |o--o| PhieuKhaoSat
+VeChuyen |o--o| PhieuKhaoSat
+@enduml

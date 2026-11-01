@@ -1,0 +1,24 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+left to right direction
+actor "Nhân viên" as NV
+rectangle "HỆ THỐNG QUẢN LÝ CỬA HÀNG NGK" {
+ usecase "UC01 · Quản lý danh mục" as UC01
+ usecase "UC02 · Lập đơn đặt hàng" as UC02
+ usecase "UC03 · Tiếp nhận hàng nhập" as UC03
+ usecase "UC04 · Bán và giao hàng" as UC04
+ usecase "UC05 · Lập phiếu ghi nợ" as UC05
+ usecase "UC06 · Tra cứu, thống kê" as UC06
+}
+NV -- UC01
+NV -- UC02
+NV -- UC03
+NV -- UC04
+NV -- UC05
+NV -- UC06
+@enduml

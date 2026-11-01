@@ -1,0 +1,48 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+title Sequence - NDC-01: Tìm kiếm tài liệu
+actor "Người dùng" as U
+boundary "Search UI" as UI
+control CatalogController as C
+control ValidationService as V
+control CatalogService as S
+database "Catalog DB" as DB
+U -> UI : chọn loại tài liệu
+activate UI
+UI -> C : yêu cầu form tìm kiếm
+activate C
+C --> UI : trả form
+deactivate C
+U -> UI : nhập tiêu chí
+UI -> C : submitSearch(criteria)
+activate C
+C -> V : validate(criteria)
+activate V
+V --> C : kết quả kiểm tra
+deactivate V
+alt dữ liệu không hợp lệ
+ C --> UI : showError()
+ UI --> U : hiển thị lỗi
+else dữ liệu hợp lệ
+ C -> S : search(criteria)
+ activate S
+ S -> DB : truy vấn tài liệu
+ activate DB
+ DB --> S : danh sách kết quả
+ deactivate DB
+ S --> C : SearchResult
+ deactivate S
+ alt không có kết quả
+  C --> UI : showEmptyResult()
+  UI --> U : "Không tìm thấy tài liệu"
+ else có kết quả
+  C --> UI : hiển thị kết quả
+  UI --> U : danh sách tài liệu
+  U -> UI : chọn tài liệu
+  UI -> C : xemChiTiet(documentId)
+ end
+end
+deactivate C
+deactivate UI
+@enduml

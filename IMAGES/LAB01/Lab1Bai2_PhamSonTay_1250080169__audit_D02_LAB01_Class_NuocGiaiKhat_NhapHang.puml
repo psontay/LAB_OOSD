@@ -1,0 +1,66 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 18
+skinparam monochrome true
+skinparam dpi 160
+skinparam nodesep 55
+skinparam ranksep 75
+skinparam classAttributeIconSize 0
+hide circle
+title Lớp nghiệp vụ — 2/3: Đặt và nhận hàng
+class NhanVien {
++maNhanVien: String
++tenNhanVien: String
++chucVu: String
+--
++dangNhap()
++lapDonDatHang()
++lapHoaDon()
+}
+class DonDatHang {
++soDDH: String
++ngayDatHang: Date
++ngayNhanHang: Date
++trangThai: String
+--
++lapDonDatHang()
++kiemTraSoDotDaGiao()
+}
+class ChiTietDonDatHang {
++soLuongDat: Integer
+--
++tinhSoLuongConLaiChuaGiao()
+}
+class PhieuGiaoHang {
++soPhieuGiaoHang: String
++ngayGiao: Date
++soTienPhaiTra: Decimal
++soDotGiao: Integer
+--
++lapPhieuGiaoHang()
++tinhSoTienPhaiTra()
+}
+class ChiTietPhieuGiaoHang {
++soLuongGiao: Integer
++donGiaNhap: Decimal
+--
++tinhThanhTien()
+}
+class NhaCungUng <<tham chiếu>>
+hide NhaCungUng members
+class NuocGiaiKhat <<tham chiếu>>
+hide NuocGiaiKhat members
+NhaCungUng "1" -- "*" DonDatHang
+NhanVien "1" -- "*" DonDatHang
+DonDatHang "1" *-right- "*" ChiTietDonDatHang
+DonDatHang "1" -down- "0..3" PhieuGiaoHang
+PhieuGiaoHang "1" *-right- "*" ChiTietPhieuGiaoHang
+NuocGiaiKhat "1" -- "*" ChiTietDonDatHang
+NuocGiaiKhat "1" -- "*" ChiTietPhieuGiaoHang
+legend bottom
+Các lớp «tham chiếu»: xem thuộc tính ở góc nhìn 1/3.
+endlegend
+@enduml

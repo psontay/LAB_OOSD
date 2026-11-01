@@ -1,0 +1,20 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+left to right direction
+actor "Nhân viên" as NV
+rectangle "UC05 · LẬP PHIẾU GHI NỢ" {
+ usecase "Lập phiếu ghi nợ" as NO
+ usecase "Kiểm tra khách quen" as KH
+ usecase "Tính số tiền chưa trả" as TIEN
+ usecase "Lưu phiếu và nhân viên lập" as LUU
+}
+NV -- NO
+NO ..> KH : <<include>>
+NO ..> TIEN : <<include>>
+NO ..> LUU : <<include>>
+@enduml

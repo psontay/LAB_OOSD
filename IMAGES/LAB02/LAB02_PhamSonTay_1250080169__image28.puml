@@ -1,0 +1,38 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+title Sequence - NDC-03: Đăng nhập
+actor "Người dùng" as U
+boundary "Login UI" as UI
+control AuthController as C
+control AuthService as S
+database "UserAccount DB" as DB
+U -> UI : nhập username/password
+activate UI
+UI -> C : login(credentials)
+activate C
+C -> S : authenticate(credentials)
+activate S
+S -> DB : findUser(username)
+activate DB
+DB --> S : UserAccount
+deactivate DB
+S -> S : kiểm tra password
+alt tài khoản không tồn tại hoặc sai mật khẩu
+ S --> C : authentication FAILED
+ note right of S
+ [BỔ SUNG] tăng soLanSai,
+ khóa tạm thời nếu vượt giới hạn
+end note
+ C --> UI : báo lỗi
+ UI --> U : hiển thị lỗi
+else xác thực thành công
+ S --> C : authentication SUCCESS (role)
+ deactivate S
+ C -> C : tạo session
+ C --> UI : session created (role)
+ UI --> U : chuyển trang chính theo quyền
+end
+deactivate C
+deactivate UI
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+title BÁN HÀNG VÀ HẸN PHẦN THIẾU
+hide footbox
+actor "Nhân viên" as NV
+participant ":FrmBanHang" as F
+participant ":BanHangService" as S
+participant ":CuaHangRepository" as R
+NV -> F : Lưu hóa đơn
+F -> S : banHang(dto)
+S -> R : begin(); lock("NuocGiaiKhat", mã)
+S -> R : load("KhachHang", maKH)
+S -> R : query(tồn và giá trị hóa đơn)
+R --> S : khách, tồn hiện tại
+alt hợp lệ
+ S -> R : save(HoaDon + CTHoaDon)
+ opt khách quen, thiếu hàng
+  S -> R : save(PhieuHen + CTPhieuHen)
+ end
+ S -> R : commit()
+ S --> F : maHD, phần đã giao và còn hẹn
+else else: vi phạm / lỗi
+ S -> R : rollback()
+ S --> F : từ chối: khách vãng lai thiếu hàng / tiền
+end
+@enduml

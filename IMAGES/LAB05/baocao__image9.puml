@@ -1,0 +1,42 @@
+@startuml SD01_Cau6
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+autonumber "<b>[0]"
+title Tuần tự - Lập phiếu đăng ký theo đoàn
+actor "Nhân viên\nbán tour" as NV
+participant ":FrmPhieuDoan" as F
+participant ":PhieuDoanService" as S
+participant ":Db" as D
+database "DULICH" as O
+NV -> F : chọn khách, tour, ngày đi, số người
+F -> S : TinhKinhPhi(maTour, soNguoi)
+S -> D : Scalar(SELECT DonGia ...)
+D -> O
+O --> S : đơn giá
+S --> F : kinh phí
+F --> NV : hiển thị kinh phí, cọc gợi ý
+NV -> F : bấm Lập phiếu
+F -> S : LapPhieu(dto, khachMoi, ds)
+activate S
+S -> S : KiemTra(...)
+alt vi phạm quy tắc
+  S --> F : KetQua.Loi(...)
+else hợp lệ
+  S -> D : SinhMa("SEQ_PHIEU")
+  S -> D : Transaction(...)
+  activate D
+  D -> O : INSERT KhachDoan (nếu mới)
+  D -> O : INSERT PhieuDangKyDoan
+  D -> O : INSERT NguoiDiCung x n
+  D --> S : commit
+  deactivate D
+  S --> F : KetQua.Dat(soPhieu)
+end
+deactivate S
+F --> NV : thông báo + nạp lại danh sách
+@enduml

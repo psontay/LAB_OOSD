@@ -1,0 +1,47 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+class HoaDon {
+ - MaHD: String {ID}
+ - MaKH: String
+ - MaNV: String
+ - NgayLap: Date
+ - SoTienDaTra: Decimal
+ --
+ + conPhaiTra(tong: Decimal): Decimal
+}
+class CTHoaDon {
+ - MaHD: String {ID}
+ - MaNGK: String {ID}
+ - SoLuongMua: Int
+ - DonGiaBan: Decimal
+ - SoLuongGiaoNgay: Int
+ --
+ + thanhTien(): Decimal
+}
+class PhieuHen {
+ - MaPH: String {ID}
+ - MaHD: String
+ - NgayHen: Date
+ - NgayGiaoThucTe: Date?
+ - TrangThai: String
+ --
+ + xacNhanGiao(ngay: Date): void
+}
+class CTPhieuHen {
+ - MaPH: String {ID}
+ - MaNGK: String {ID}
+ - MaHD: String
+ - SoLuongHen: Int
+ --
+ + kiemTraSoLuong(): Boolean
+}
+HoaDon "1" -right- "1..*" CTHoaDon
+HoaDon "1" -- "0..*" PhieuHen
+CTHoaDon "1" -- "0..*" CTPhieuHen
+PhieuHen "1" -right- "1..*" CTPhieuHen
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+class LoaiNGK {
+ - MaLoai: String {ID}
+ - TenLoai: String
+ - MaNCU: String
+ --
+ + doiNhaCungUng(maNCU: String): void
+}
+class NhaCungUng {
+ - MaNCU: String {ID}
+ - TenNCU: String
+ - DiaChi: String
+ - DienThoai: String
+ --
+ + capNhatLienHe(dto: LienHeDTO): void
+}
+class NuocGiaiKhat {
+ - MaNGK: String {ID}
+ - TenNGK: String
+ - DonViTinh: String
+ - MaLoai: String
+ --
+ + doiThongTin(dto: NGKDTO): void
+}
+class KhachHang {
+ - MaKH: String {ID}
+ - HoTen: String
+ - LoaiKhach: String
+ - DiaChi: String?
+ - DienThoai: String?
+ --
+ + laKhachQuen(): Boolean
+}
+' Multiplicities are resolved by BR01 and section 2.4.3 of the report.
+LoaiNGK "0..*" -right- "1" NhaCungUng
+LoaiNGK "1" -- "0..*" NuocGiaiKhat
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 18
+skinparam monochrome true
+skinparam dpi 160
+skinparam nodesep 55
+skinparam ranksep 75
+skinparam classAttributeIconSize 0
+hide circle
+title Lớp nghiệp vụ — 1/3: Danh mục
+class NhanHieu {
++maNhanHieu: String
++tenNhanHieu: String
+--
++themNhanHieu()
++suaNhanHieu()
++xoaNhanHieu()
+}
+class NhaCungUng {
++maNCC: String
++tenNCC: String
++diaChi: String
++soDienThoai: String
+--
++themNCC()
+}
+class NuocGiaiKhat {
++maNGK: String
++tenNGK: String
++donViTinh: String
++donGiaBan: Decimal
++soLuongTonKho: Integer
+--
++kiemTraTonKho(soLuong)
++capNhatTonKho(soLuong)
+}
+NhanHieu "1" -- "*" NuocGiaiKhat
+NhaCungUng "1" -- "*" NuocGiaiKhat
+NhanHieu -[hidden]right- NhaCungUng
+@enduml

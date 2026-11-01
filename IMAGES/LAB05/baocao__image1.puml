@@ -1,0 +1,49 @@
+@startuml UC01_TongQuat
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+left to right direction
+title Use case tổng quát (theo tác nhân)
+actor "Khách hàng" as KH
+actor "Nhân viên bán tour" as BT
+actor "Điều hành tour" as DH
+actor "Hướng dẫn viên" as HD
+actor "Kế toán" as KT
+actor "<<system>>\nWebsite" as WEB
+actor "<<system>>\nBảo hiểm" as BH
+actor "<<system>>\nEmail" as MAIL
+rectangle "Văn Hóa Việt Travel" {
+  usecase "Tra cứu tour" as A1
+  usecase "Đăng ký tour theo đoàn" as B1
+  usecase "Mua vé chuyến (khách lẻ)" as B2
+  usecase "Quản lý thông tin khách" as B3
+  usecase "Gửi khảo sát sau tour" as B4
+  usecase "Cập nhật tour và lộ trình" as C1
+  usecase "Lên lịch chuyến" as C2
+  usecase "Phân công hướng dẫn viên" as C3
+  usecase "Theo dõi tình trạng tour" as C4
+  usecase "Xem lịch dẫn tour" as D1
+  usecase "Quyết toán kinh phí đoàn" as E1
+  usecase "Tính lương tháng" as E2
+}
+KH -- A1
+BT -- B1
+BT -- B2
+BT -- B3
+BT -- B4
+DH -- C1
+DH -- C2
+DH -- C3
+DH -- C4
+HD -- D1
+HD -- C4
+KT -- E1
+KT -- E2
+A1 -- WEB
+B1 -- BH
+B4 -- MAIL
+@enduml

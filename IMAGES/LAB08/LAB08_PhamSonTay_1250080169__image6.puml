@@ -1,0 +1,44 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+hide circle
+hide empty methods
+class LoaiNGK {
+ MaLoai {ID}
+ TenLoai
+}
+class NhaCungUng {
+ MaNCU {ID}
+ TenNCU, DiaChi, DienThoai
+}
+class NuocGiaiKhat {
+ MaNGK {ID}
+ TenNGK, DonViTinh
+}
+class DonDatHang {
+ MaDDH {ID}
+ NgayDat, NgayNhanDuKien
+}
+class CTDonDatHang {
+ MaDDH + MaNGK {ID}
+ SoLuongDat
+}
+class PhieuGiaoHang {
+ MaPGH {ID}
+ NgayGiao, SoTienPhaiTra
+}
+class CTPhieuGiaoHang {
+ MaPGH + MaNGK {ID}
+ SoLuongGiao
+}
+LoaiNGK "0..*" -right- "1" NhaCungUng
+LoaiNGK "1" -- "0..*" NuocGiaiKhat
+NuocGiaiKhat "1" -- "0..*" CTDonDatHang
+DonDatHang "1" -right- "1..*" CTDonDatHang
+DonDatHang "1" -- "0..3" PhieuGiaoHang
+CTDonDatHang "1" -- "0..3" CTPhieuGiaoHang
+PhieuGiaoHang "1" -right- "1..*" CTPhieuGiaoHang
+@enduml

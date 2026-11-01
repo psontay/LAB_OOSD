@@ -1,0 +1,103 @@
+@startuml CL01_MienNghiepVu
+skinparam monochrome true
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam dpi 140
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam packageStyle rectangle
+title Mô hình lớp nghiệp vụ (domain model)
+abstract class KhachHang {
+  dienThoai
+  diaChi
+}
+class KhachDoan {
+  maKD {id}
+  tenCoQuan
+  nguoiDaiDien
+}
+class KhachLe {
+  maKL {id}
+  hoTen
+  soGiayTo
+}
+abstract class DangKyTour {
+  soNguoi
+  thanhTien
+  trangThai
+  +huy()
+}
+class PhieuDangKyDoan {
+  soPhieu {id}
+  ngayDi
+  diaDiemDon
+  coBaoHiem
+  tienCoc
+  +datCoc()
+  +quyetToan()
+}
+class VeChuyen {
+  soVe {id}
+  ngayMua
+  +thanhToan()
+}
+class Tour {
+  maTour {id}
+  tenTour
+  soNgay
+  soDem
+  donGia
+}
+class NoiDungChan {
+  thuTu {id}
+  noiAn
+  khachSan
+  loaiKhachSan
+}
+class DiemThamQuan {
+  maDTQ {id}
+  ten
+  yNghia
+}
+class ChuyenDi {
+  maChuyen {id}
+  ngayDi
+  ngayVe
+  soCho
+}
+class NhanVien {
+  maNV {id}
+  hoTen
+  luongCanBan
+  +tinhLuong(thang)
+}
+class PhanCong <<association class>> {
+  tuNgay
+  denNgay
+  luongTour
+}
+class PhieuKhaoSat {
+  mucHaiLong
+  gopY
+}
+class NguoiDiCung {
+  hoTen
+  ngaySinh
+}
+KhachHang <|-- KhachDoan
+KhachHang <|-- KhachLe
+DangKyTour <|-- PhieuDangKyDoan
+DangKyTour <|-- VeChuyen
+KhachDoan "1" -- "0..*" PhieuDangKyDoan
+KhachLe "1" -- "0..*" VeChuyen
+PhieuDangKyDoan "0..*" -- "1" Tour
+VeChuyen "0..*" -- "1" ChuyenDi
+ChuyenDi "0..*" -- "1" Tour
+Tour "1" *-- "1..*" NoiDungChan
+Tour "0..*" -- "0..*" DiemThamQuan
+PhieuDangKyDoan "1" *-- "0..*" NguoiDiCung
+NhanVien "1" -- "0..*" PhanCong
+PhanCong "0..*" -- "0..1" PhieuDangKyDoan
+PhanCong "0..1" -- "0..1" ChuyenDi
+DangKyTour "1" -- "0..1" PhieuKhaoSat
+@enduml
